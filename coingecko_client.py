@@ -19,9 +19,13 @@ def get_intraday_ohlcv(coin_id: str, vs_currency: str = 'usd', days: int = 1) ->
     # Using 'cg.get_coin_market_chart_by_id' to get ohlc data for up to 'days' days 
     # with an ~hourly granularity (CoinGecko typically returns up to 24 data points for 1 day).
     
-    data = cg.get_coin_market_chart_by_id(id=coin_id, vs_currency=vs_currency, days=days)
-    # data is a dict with keys: 'prices', 'market_caps', 'total_volumes'
-    # each is a list of [timestamp, value]
+    try:
+        data = cg.get_coin_market_chart_by_id(id=coin_id, vs_currency=vs_currency, days=days)
+        # data is a dict with keys: 'prices', 'market_caps', 'total_volumes'
+        # each is a list of [timestamp, value]
+    except ValueError as e:
+        print(f"Error fetching data for {coin_id}: {e}")
+        return pd.DataFrame()  # Return empty DataFrame on error
     
     prices = data['prices']          # timestamp in ms, price
     volumes = data['total_volumes']  # timestamp in ms, volume
@@ -48,3 +52,4 @@ def get_intraday_ohlcv(coin_id: str, vs_currency: str = 'usd', days: int = 1) ->
     # Reorder columns
     df = df[['timestamp', 'open', 'high', 'low', 'close', 'volume']]
     return df
+

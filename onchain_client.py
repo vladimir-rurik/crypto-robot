@@ -15,7 +15,7 @@ def get_onchain_metrics(coin_symbol: str) -> pd.DataFrame:
     # Pseudocode: you'd replace this with an actual API call
     # e.g. requests.get("https://some-blockexplorer.com/api/...")
 
-    # Example: create dummy data
+    # Example: create dummy data, don't forget to add a symbol column
     now = datetime.utcnow()
     data = {
         'timestamp': [now],
