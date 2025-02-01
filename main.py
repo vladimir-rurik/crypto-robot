@@ -38,7 +38,7 @@ if __name__ == "__main__":
         
         try:
             # 4. Retrieve intraday OHLCV data
-            ohlcv_df = get_intraday_ohlcv(coin_id, vs_currency='usd', days=1)
+            ohlcv_df = get_intraday_ohlcv(coin_id, vs_currency='eur', days=365)
             if ohlcv_df.empty:
                 print(f"⚠️ No data available for {coin_id}. Skipping...")
                 continue
