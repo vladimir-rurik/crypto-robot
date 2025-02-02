@@ -1,133 +1,105 @@
 """
-Data preprocessing and feature engineering pipeline.
-Handles cleaning, missing data, outliers, and calls FeatureEngineer.
+Data preprocessing pipeline: handles cleaning, missing values, outliers,
+and calls FeatureEngineer for advanced features.
+No database creation or usage.
 """
 
 import os
-import sqlite3
 import pandas as pd
 import numpy as np
-from typing import Optional, Tuple
+# 1. Enable the experimental feature
+from sklearn.experimental import enable_iterative_imputer
+# 2. Now safely import the imputer classes
+from sklearn.impute import KNNImputer, IterativeImputer
+from sklearn.preprocessing import RobustScaler
 
 from .feature_engineering import FeatureEngineer
-from sklearn.preprocessing import RobustScaler
-from sklearn.experimental import enable_iterative_imputer
-from sklearn.impute import KNNImputer, IterativeImputer
+
 
 class DataPreprocessor:
-    def __init__(self, db_path='data/market_data.db'):
-        self.db_path = db_path
-        self.feature_engineer = FeatureEngineer()
-        os.makedirs(os.path.dirname(db_path), exist_ok=True)
-        self.initialize_database()
+    """
+    DataPreprocessor cleans raw data (missing values, outliers) 
+    and calls FeatureEngineer for feature creation.
+    """
 
-    def initialize_database(self):
-        # Creates DB tables if you want to store raw/processed data
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute('''
-                CREATE TABLE IF NOT EXISTS raw_data (
-                    date TEXT,
-                    symbol TEXT,
-                    open REAL,
-                    high REAL,
-                    low REAL,
-                    close REAL,
-                    volume REAL,
-                    PRIMARY KEY (date, symbol)
-                )
-            ''')
-            conn.execute('''
-                CREATE TABLE IF NOT EXISTS processed_data (
-                    date TEXT,
-                    symbol TEXT,
-                    feature_name TEXT,
-                    value REAL,
-                    PRIMARY KEY (date, symbol, feature_name)
-                )
-            ''')
+    def __init__(self):
+        """
+        No database initialization here, just set up feature engineering instance.
+        """
+        self.feature_engineer = FeatureEngineer()
 
     def clean_data(self, data: pd.DataFrame) -> pd.DataFrame:
-        # 1) Handle missing data
+        """
+        Orchestrates data cleaning steps:
+        1) Handle missing values
+        2) Remove outliers
+        """
         data = self._handle_missing_values(data)
-        # 2) Remove outliers using robust methods
         data = self._remove_outliers(data)
         return data
 
     def _handle_missing_values(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Handle missing values with:
+         - Synthetic fill for completely missing columns
+         - IterativeImputer for high-missing columns
+         - KNNImputer for low-missing columns
+         - Final forward/backward fill
+        """
         data = data.copy()
         missing_pct = data.isnull().sum() / len(data)
 
-        # If entire column is missing, fill with synthetic data
-        all_missing = missing_pct[missing_pct == 1.0].index
-        for col in all_missing:
-            # Some logic to fill in synthetic values
-            data[col] = np.random.normal(data.mean().mean(), data.std().mean(), len(data))
+        # 1) If any columns are 100% missing, fill with synthetic data
+        fully_missing = missing_pct[missing_pct == 1.0].index
+        for col in fully_missing:
+            data[col] = np.random.normal(0, 1, size=len(data))
 
-        # Splitting columns by missing % for different imputation strategies
+        # 2) Group columns by missing percentage
         high_missing = missing_pct[(missing_pct > 0.3) & (missing_pct < 1.0)].index
-        low_missing  = missing_pct[missing_pct <= 0.3].index
+        low_missing  = missing_pct[(missing_pct > 0) & (missing_pct <= 0.3)].index
 
+        # 3) IterativeImputer for "high_missing" columns
         if len(high_missing) > 0:
-            imp = IterativeImputer(random_state=42)
-            data[high_missing] = imp.fit_transform(data[high_missing])
+            imp_iter = IterativeImputer(random_state=42)
+            data[high_missing] = imp_iter.fit_transform(data[high_missing])
 
+        # 4) KNNImputer for "low_missing" columns
         if len(low_missing) > 0:
-            imp = KNNImputer()
-            data[low_missing] = imp.fit_transform(data[low_missing])
+            imp_knn = KNNImputer(n_neighbors=5)
+            data[low_missing] = imp_knn.fit_transform(data[low_missing])
 
-        # Final forward/backward fill
+        # 5) Final forward/backward fill for any remaining holes
         data.ffill(inplace=True)
         data.bfill(inplace=True)
+
         return data
 
     def _remove_outliers(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Remove outliers using RobustScaler for columns: Open, High, Low, Close, Volume.
+        Outliers beyond threshold get turned into NaN, then re-imputed.
+        """
         data = data.copy()
         scaler = RobustScaler()
-        cols = ['Open', 'High', 'Low', 'Close', 'Volume']
+        cols_to_scale = ["Open", "High", "Low", "Close", "Volume"]
 
-        for col in cols:
-            if col not in data.columns: 
+        for col in cols_to_scale:
+            if col not in data.columns:
                 continue
-            col_vals = data[col].values.reshape(-1, 1)
-            scaled = scaler.fit_transform(col_vals)
-            # Mask out anything above threshold
-            outlier_mask = np.abs(scaled) > 3
-            data.loc[outlier_mask.ravel(), col] = np.nan
+            # Convert to numeric to avoid errors
+            data[col] = pd.to_numeric(data[col], errors='coerce')
+            # Apply robust scaling
+            scaled = scaler.fit_transform(data[col].values.reshape(-1, 1))
+            # Mark outliers
+            mask_outliers = (abs(scaled) > 3)  # threshold => 3
+            data.loc[mask_outliers.ravel(), col] = np.nan
 
-        # Re-impute after removing outliers
+        # Re-impute missing if any outliers were set to NaN
         data = self._handle_missing_values(data)
         return data
 
     def engineer_features(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Generate new features from cleaned data using FeatureEngineer.
+        """
         return self.feature_engineer.process_features(data)
-
-    def process_new_data(self, symbol: str, new_data: pd.DataFrame):
-        # 1) Clean data
-        cleaned_data = self.clean_data(new_data)
-        # 2) Feature engineering
-        features = self.engineer_features(cleaned_data)
-
-        # 3) Store data in DB
-        with sqlite3.connect(self.db_path) as conn:
-            for idx, row in cleaned_data.iterrows():
-                conn.execute('''
-                    INSERT OR IGNORE INTO raw_data
-                    (date, symbol, open, high, low, close, volume)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)
-                ''', (idx.strftime('%Y-%m-%d %H:%M:%S'), symbol,
-                      row['Open'], row['High'], row['Low'],
-                      row['Close'], row['Volume']))
-            for col in features.columns:
-                for idx, val in features[col].items():
-                    if pd.notna(val):
-                        conn.execute('''
-                            INSERT OR IGNORE INTO processed_data
-                            (date, symbol, feature_name, value)
-                            VALUES (?, ?, ?, ?)
-                        ''', (idx.strftime('%Y-%m-%d %H:%M:%S'),
-                              symbol, col, val))
-
-    def get_latest_data(self, symbol: str,
-                        start_date: Optional[str] = None) -> Tuple[pd.DataFrame, pd.DataFrame]:
-        # Retrieve from DB if needed
-        ...
