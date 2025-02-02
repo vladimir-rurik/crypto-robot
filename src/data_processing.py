@@ -1,17 +1,10 @@
-"""
-Data processing and feature engineering pipeline script.
-Main script for running data preprocessing, feature engineering,
-and consolidating data into a single CSV for further modeling.
-No database creation or usage.
-"""
-
 import os
+import time
 import pandas as pd
 
 from market_analyzer.preprocessor import DataPreprocessor
-from market_analyzer.data_dashboard import DataProcessingDashboard  # optional for visualization
+from market_analyzer.data_dashboard import DataProcessingDashboard
 
-# list of symbols
 CRYPTO_SYMBOLS = [
     "ETH", "SOL", "ADA", "LINK", "AVAX",
     "XLM", "LTC", "DOT", "UNI", "AAVE",
@@ -19,26 +12,31 @@ CRYPTO_SYMBOLS = [
 ]
 
 def main():
-    """Run data processing pipeline using local minutely CSV files only."""
+    print("[INFO] Starting data processing pipeline...")
     os.makedirs('data', exist_ok=True)
     
-    # Initialize our data preprocessor (no db_path needed)
     preprocessor = DataPreprocessor()
-    dashboard = DataProcessingDashboard()  # optional if you want data quality plots
-
+    dashboard = DataProcessingDashboard()  # optional
+    
     all_processed = []
+    n_symbols_processed = 0
 
     for symbol in CRYPTO_SYMBOLS:
-        # Construct the path to the CSV file
-        file_path = os.path.join('..\data', f"{symbol}_minutely_data.csv")
+        file_path = os.path.join('..', 'data', f"{symbol}_minutely_data.csv")
         if not os.path.exists(file_path):
-            print(f"[Warning] File not found for {symbol}: {file_path}")
+            print(f"[WARNING] CSV not found for {symbol} => {file_path}")
             continue
 
-        print(f"\nLoading {symbol} from {file_path} ...")
-        df = pd.read_csv(file_path, parse_dates=['timestamp'], index_col='timestamp')
+        print(f"\n[INFO] Loading {symbol} from {file_path} ...")
+        start_time = time.time()
 
-        # Rename columns if your CSV differs
+        # Read CSV
+        df = pd.read_csv(
+            file_path,
+            parse_dates=["timestamp"],  # Adjust to your actual datetime column
+            index_col="timestamp"
+        )
+        # Rename columns
         df.rename(columns={
             "open": "Open",
             "high": "High",
@@ -47,39 +45,41 @@ def main():
             "volume": "Volume"
         }, inplace=True)
 
-        # Clean the data
+        # Clean data
+        print(f"[DEBUG]  -> Cleaning {symbol} data ...")
         cleaned_data = preprocessor.clean_data(df)
 
         # Feature engineering
+        print(f"[DEBUG]  -> Engineering features for {symbol}...")
         features = preprocessor.engineer_features(cleaned_data)
 
-        # Combine cleaned columns with engineered features
+        # Combine
         combined = cleaned_data.join(features, how="inner")
-        combined['symbol'] = symbol
-
-        # (Optional) Dashboard: data quality, summary plots, etc.
-        # dashboard.plot_data_quality(cleaned_data)
-        # dashboard.plot_summary_dashboard(cleaned_data, features)
+        combined["symbol"] = symbol
 
         all_processed.append(combined)
+        n_symbols_processed += 1
+        
+        # Print how long it took for this symbol
+        elapsed = time.time() - start_time
+        print(f"[INFO] Done processing {symbol} in {elapsed:.2f} seconds.")
 
-    # Merge all symbols into a single DataFrame and write to CSV
+    # If any symbols were processed, save combined
     if all_processed:
+        print(f"\n[INFO] Concatenating data for {n_symbols_processed} symbols...")
         final_df = pd.concat(all_processed, axis=0)
         final_df.sort_index(inplace=True)
-        out_csv = os.path.join('data', 'combined_minute_data.csv')
+
+        out_csv = os.path.join('..', 'data', 'combined_minute_data.csv')
         final_df.to_csv(out_csv)
-        print(f"\nAll symbols processed successfully.")
-        print(f"Combined data written to => {out_csv}")
+        print(f"[INFO] Combined data written to => {out_csv}")
     else:
-        print("No data processed. Check if CSV files exist.")
+        print("[WARNING] No data processed. Check your CSV files.")
+
+    print("[INFO] Data processing pipeline finished.")
 
 if __name__ == "__main__":
     try:
         main()
-    except KeyboardInterrupt:
-        print("\nProcessing interrupted by user.")
     except Exception as e:
-        print(f"\nError during processing: {str(e)}")
-    finally:
-        print("\nData processing pipeline finished.")
+        print(f"[ERROR] {str(e)}")
