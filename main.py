@@ -9,6 +9,7 @@ from config import DB_CONFIG  # Import the database configuration
 if __name__ == "__main__":
     # Map CoinGecko IDs to short names (symbols)
     crypto_ids = {
+        'bitcoin': 'BTC',
         'ethereum': 'ETH',
         'solana': 'SOL',
         'cardano': 'ADA',
