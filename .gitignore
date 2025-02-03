@@ -1,4 +1,5 @@
-*.csv
+src/data/*.csv
+*_data.csv
 *.zip
 
 # Byte-compiled / optimized / DLL files
