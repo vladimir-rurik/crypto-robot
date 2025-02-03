@@ -60,6 +60,113 @@ Because `combined_minute_data.csv` is large, we discussed:
 - **Filtering** columns or date ranges if not all data is needed  
 - **Possible** format conversions (Parquet or database storage)
 
+---
+
+## EDA for AAVE
+
+Below are some EDA charts and descriptive stats specifically for **AAVE** over a multi-year timeframe (from ~2020-10-16 to 2025-02-01 in minute-level data). We downsampled or highlighted anomalies to keep the charts legible.
+
+### Downsampled Price and Anomalies
+![AAVE Closing Price Over Time (Downsampled)](assets/aave_anomalies.png)
+
+- **Red dots** indicate potential anomalies or outliers (massive sudden spikes/dips).
+- AAVE price soared to over \$600 in early 2021, then retraced under \$100–\$200 for extended periods.
+- We flagged ~69 anomalies where abrupt changes exceeded a threshold.
+
+### Rolling Average
+![AAVE Closing Price with Rolling Average](assets/aave_rolling_avg.png)
+
+- The **orange** line is a **60-minute rolling average** to smooth short-term volatility.
+- Notice the difference between the raw close vs. the smoothed curve at times of high fluctuation.
+
+### Volume Over Time
+![AAVE Volume Over Time (Downsampled)](assets/aave_volume.png)
+
+- Shows minute-level trade volume. Even after removing zero-volume or outlier volumes, the data remains quite noisy.
+- Potential data collection artifacts or repeated high volumes might appear consistently.
+
+### Feature Correlation
+![AAVE Feature Correlation (From 2020-10-16)](assets/aave_correlation.png)
+
+- Price features (`open, high, low, close`) are essentially **1.0 correlated** with each other in daily or minute data, typical for crypto intraday timescales.
+- Volume is less correlated (around ~0.15) with price. That suggests volume fluctuations have some but not an extremely strong relationship with price.
+
+### Detailed Statistics
+
+**Data Shape**: (2260050, 6)  
+(**Columns**: `timestamp`, `open`, `high`, `low`, `close`, `volume`)
+
+<details>
+<summary>Data Info & Descriptive Stats</summary>
+--- EDA for AAVE ---
+Data Shape: (2260050, 6)
+
+Data Info:
+<class 'pandas.core.frame.DataFrame'>
+Index: 2260050 entries, 180 to 2260229
+Data columns (total 6 columns):
+ #   Column     Dtype
+---  ------     -----
+ 0   timestamp  datetime64[ns]
+ 1   open       float64
+ 2   high       float64
+ 3   low        float64
+ 4   close      float64
+ 5   volume     float64
+dtypes: datetime64[ns](1), float64(5)
+memory usage: 120.7 MB
+None
+
+Descriptive Statistics:
+                           timestamp          open          high           low         close        volume
+count                        2260050  2.260050e+06  2.260050e+06  2.260050e+06  2.260050e+06  2.260050e+06
+mean   2022-12-10 14:24:37.190095104  1.592175e+02  1.593899e+02  1.590426e+02  1.592180e+02  1.419901e+02
+min              2020-10-16 00:00:00  2.598600e+01  2.598800e+01  2.593900e+01  2.598700e+01  0.000000e+00
+25%              2021-11-13 07:37:15  7.770000e+01  7.780000e+01  7.767400e+01  7.770000e+01  1.501500e+01
+50%              2022-12-10 16:29:30  1.008400e+02  1.009200e+02  1.007800e+02  1.008500e+02  4.995100e+01
+75%              2024-01-07 02:41:45  2.223000e+02  2.226000e+02  2.220300e+02  2.223000e+02  1.367030e+02
+max              2025-02-02 11:34:00  6.658900e+02  6.680000e+02  6.640000e+02  6.658900e+02  7.340102e+04
+std                              NaN  1.158957e+02  1.160797e+02  1.157076e+02  1.158955e+02  3.673587e+02
+
+Missing Values:
+timestamp    0
+open         0
+high         0
+low          0
+close        0
+volume       0
+dtype: int64
+
+Removed 77517 rows with zero volume.
+Identified 223663 volume outliers.
+
+Missing Timestamps: 302625
+DatetimeIndex(['2020-10-16 00:17:00', '2020-10-16 00:25:00',
+               '2020-10-16 00:29:00', '2020-10-16 00:34:00',
+               '2020-10-16 00:42:00', '2020-10-16 00:44:00',
+               '2020-10-16 00:46:00', '2020-10-16 00:49:00',
+               '2020-10-16 00:55:00', '2020-10-16 00:56:00'],
+              dtype='datetime64[ns]', freq=None)
+
+Detected 69 potential price anomalies (sudden jumps).
+
+Additional Insights:
+Maximum Closing Price: 663.53 on 2021-05-18T21:27:00.000000000
+Minimum Closing Price: 25.987 on 2020-11-05T09:04:00.000000000
+Average Volume (post-cleaning): 71.44266967430202
+**Missing Values**: 0 in each column.  
+**Removed** 77,517 rows with zero volume.  
+**Identified** 223,663 volume outliers.  
+**Missing Timestamps**: 302,625 (irregular sampling or incomplete data).  
+**Detected** 69 price anomalies.  
+**Max Closing Price**: \$663.53 near 2021-05-18.  
+**Min Closing Price**: \$25.987 near 2020-11-05.  
+**Average Volume** post-cleaning: ~71.44.  
+
+</details>
+
+---
+
 ### Data Cleaning & Feature Engineering
 We ran scripts to:
 1. **Clean** missing/outlier data via robust scalers and imputers.  
