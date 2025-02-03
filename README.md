@@ -29,6 +29,9 @@
   - [Figure 3: Cross-Correlation Plot](#figure-3-cross-correlation-plot)
   - [Figure 4: Ratio Table and Pivot](#figure-4-ratio-table-and-pivot)
   - [Figure 5: Ensemble vs. Buy & Hold](#figure-5-ensemble-vs-buy--hold)
+- [Analysis of `all_pairs_ratios.csv`](#analysis-of-all_pairs_ratioscsv)
+  - [Mean Ratio & Pct Inversion](#mean-ratio--pct-inversion)
+  - [Implications for Trading](#implications-for-trading)
 - [Next Steps](#next-steps)
 - [License & Disclaimer](#license--disclaimer)
 
@@ -234,6 +237,28 @@ This helps ensure large data sets are handled properly and that we can see any p
 - Both lines grew significantly, e.g. +600% or more.  
 - The buy & hold might edge out the ensemble’s final percentage gain.  
 - However, if the ensemble had fewer, shallower drawdowns, it could be more attractive for certain investors.
+
+---
+
+## Analysis of `all_pairs_ratios.csv`
+
+Below is a snippet of the CSV (each row represents `(symbol_x, symbol_y, mean_ratio, std_ratio, pct_inversion)`):
+
+
+### Mean Ratio & Pct Inversion
+1. **`mean_ratio`**: If `X / Y = mean_ratio >> 1`, it means symbol X’s price is typically far higher than symbol Y’s in **raw** USD terms. For instance, if `mean_ratio = 245.07` for `(AAVE, ADA)`, that means on average, AAVE is about 245× more expensive than ADA.  
+2. **`pct_inversion`**: The fraction of rows (in some historical dataset) where `X` is **below** `Y`. A `0.0` implies X was **never** cheaper than Y. A `1.0` means X was **always** cheaper. Values like `0.2491` means ~24.91% of the time X dips under Y.  
+3. **Observing extremes**:  
+   - For `(AAVE, BTC)`, `mean_ratio=0.0038` with `pct_inversion=1.0`. This suggests AAVE is always cheaper than BTC in raw price, and it never inverts.  
+   - For `(BTC, ADA)`, `mean_ratio=80362.0195`, `pct_inversion=0.0`. That means 0% of the time is BTC < ADA, which is logical: BTC is typically tens of thousands of USD, while ADA is under a dollar.
+
+### Implications for Trading
+- **No Inversions** (`pct_inversion=0.0`): If X is **always** above Y in price, there is no crossover event to exploit, so a “buy X if it dips below Y” logic never triggers.  
+- **Rare Inversions** (`pct_inversion` near **0.0** but not zero): Might be interesting if X occasionally dips below Y for short windows. A strategy could buy X each time that rare inversion happens, expecting it to revert.  
+- **Volatility** (`std_ratio`) can indicate how stable that ratio is. For example, `AAVE vs. MATIC` has a large standard deviation (1325.5416), meaning the ratio can swing widely. Even if mean is high, it’s not stable.  
+- **Arbitrage / Pairs Trading**: Typically requires cointegration or stable ratio over time. A high mean ratio alone doesn’t guarantee reversion unless the ratio is proven stationary.
+
+Hence, `all_pairs_ratios.csv` provides a **static** view of average relationships between coin prices. You can incorporate it as **additional features** (like “mean ratio to BTC” or “% of time X < Y” as a signal) into a multi-coin or cross-coin strategy.
 
 ---
 
