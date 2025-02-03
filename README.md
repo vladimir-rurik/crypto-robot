@@ -160,15 +160,22 @@ This yields an **at-a-glance** comparison of multiple strategies (e.g., LLM Sent
 
 ---
 
-## Images & Graph Analysis
+## Analysis
 
-### Figure 1: Code Execution with Debug Logs
-<details>
-<summary>Show Image</summary>
+### Code Execution with Debug Logs
 
-![Image: Code Execution and Debug Logs](assets/debug_logs.png)
+[INFO] Starting data processing pipeline...
 
-</details>
+[INFO] Loading ETH from ..\data\ETH_minutely_data.csv ...
+[DEBUG]  -> Cleaning ETH data ...
+[DEBUG]     clean_data() -> handling missing values...
+[DEBUG]       -> 0 columns have missing data.
+[DEBUG]     clean_data() -> removing outliers...
+[DEBUG]       -> Removing outliers with RobustScaler threshold=3
+[DEBUG]       -> Found 137912 outliers in column 'Volume'. Setting to NaN.
+[DEBUG]       -> Re-imputing after outlier removal
+[DEBUG]       -> 1 columns have missing data.
+[DEBUG]       -> Using KNNImputer for low-missing columns: ['Volume']
 
 **Analysis:**  
 The debug messages confirm each step in `data_processing.py` or `analysis.py` is running, such as:
@@ -179,7 +186,7 @@ This helps ensure large data sets are handled properly and that we can see any p
 
 ---
 
-### Figure 2: Zero-Lag Correlation Matrix
+### Zero-Lag Correlation Matrix
 <details>
 <summary>Show Image</summary>
 
@@ -195,28 +202,48 @@ This helps ensure large data sets are handled properly and that we can see any p
 
 ---
 
-### Figure 3: Cross-Correlation Plot
-<details>
-<summary>Show Image</summary>
+### Cross-Correlation Plot
 
-![Image: Cross-Correlation Function Plot](assets/cross_correlation.png)
-
-</details>
 
 **Analysis:**  
 - For example, BTC vs. ETH might show a correlation near 0-lag, meaning they move together.  
 - If a peak correlation is found at a positive lag, it suggests coin A leads coin B by that many minutes.  
 - In the example, no strong lead-lag effect was found except near lag=0, meaning simultaneous moves.
 
+[INFO] Loading data from: data\combined_minute_data.csv
+[INFO] Found 14 symbols: ['AAVE', 'ADA', 'AVAX', 'AXS', 'BTC', 'DOT', 'ETH', 'FTM', 'LTC', 'MATIC', 'SAND', 'SOL', 'UNI', 'XLM']
+
+[INFO] Top 20 pairs by correlation magnitude:
+    symbol_x symbol_y  best_lag  best_corr
+11      AAVE      UNI         0      0.928
+156      UNI     AAVE         0      0.928
+93       FTM     AVAX         0      0.921
+32      AVAX      FTM         0      0.921
+12      AAVE      XLM         0      0.919
+169      XLM     AAVE         0      0.919
+109      LTC      DOT         0      0.914
+72       DOT      LTC         0      0.914
+164      UNI      LTC         0      0.908
+115      LTC      UNI         0      0.908
+76       DOT      UNI         0      0.893
+161      UNI      DOT         0      0.893
+116      LTC      XLM         0      0.871
+177      XLM      LTC         0      0.871
+157      UNI      ADA         0      0.867
+24       ADA      UNI         0      0.867
+7       AAVE      LTC         0      0.866
+104      LTC     AAVE         0      0.866
+168      UNI      XLM         0      0.862
+181      XLM      UNI         0      0.862
+
+[INFO] Highest correlation pair: AAVE vs. UNI => Corr=0.928 @ lag=0
+
+[INFO] analysis_lag.py complete.
+
 ---
 
-### Figure 4: Ratio Table and Pivot
-<details>
-<summary>Show Image</summary>
+### Ratio Table and Pivot
 
-![Image: all_pairs_ratios pivot table](assets/ratios_pivot.png)
-
-</details>
 
 **Analysis:**  
 - Summarizes pairwise mean ratio (`mean_ratio`) of coin X to coin Y and how often X < Y (`pct_inversion`).  
@@ -225,7 +252,7 @@ This helps ensure large data sets are handled properly and that we can see any p
 
 ---
 
-### Figure 5: Ensemble vs. Buy & Hold
+### Figure: Ensemble vs. Buy & Hold
 <details>
 <summary>Show Image</summary>
 
