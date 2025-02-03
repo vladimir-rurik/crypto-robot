@@ -320,28 +320,40 @@ This helps ensure large data sets are handled properly and that we can see any p
 [INFO] Loading data from: data\combined_minute_data.csv
 [INFO] Found 14 symbols: ['AAVE', 'ADA', 'AVAX', 'AXS', 'BTC', 'DOT', 'ETH', 'FTM', 'LTC', 'MATIC', 'SAND', 'SOL', 'UNI', 'XLM']
 
-[INFO] Top 20 pairs by correlation magnitude:
-    symbol_x symbol_y  best_lag  best_corr
-11      AAVE      UNI         0      0.928
-156      UNI     AAVE         0      0.928
-93       FTM     AVAX         0      0.921
-32      AVAX      FTM         0      0.921
-12      AAVE      XLM         0      0.919
-169      XLM     AAVE         0      0.919
-109      LTC      DOT         0      0.914
-72       DOT      LTC         0      0.914
-164      UNI      LTC         0      0.908
-115      LTC      UNI         0      0.908
-76       DOT      UNI         0      0.893
-161      UNI      DOT         0      0.893
-116      LTC      XLM         0      0.871
-177      XLM      LTC         0      0.871
-157      UNI      ADA         0      0.867
-24       ADA      UNI         0      0.867
-7       AAVE      LTC         0      0.866
-104      LTC     AAVE         0      0.866
-168      UNI      XLM         0      0.862
-181      XLM      UNI         0      0.862
+
+#### Top 20 Pairs in a Markdown Table
+
+| Index | symbol_x | symbol_y | best_lag | best_corr |
+|------:|:--------:|:--------:|---------:|----------:|
+| 11  | AAVE | UNI  | 0 | 0.928 |
+| 156 | UNI  | AAVE | 0 | 0.928 |
+| 93  | FTM  | AVAX | 0 | 0.921 |
+| 32  | AVAX | FTM  | 0 | 0.921 |
+| 12  | AAVE | XLM  | 0 | 0.919 |
+| 169 | XLM  | AAVE | 0 | 0.919 |
+| 109 | LTC  | DOT  | 0 | 0.914 |
+| 72  | DOT  | LTC  | 0 | 0.914 |
+| 164 | UNI  | LTC  | 0 | 0.908 |
+| 115 | LTC  | UNI  | 0 | 0.908 |
+| 76  | DOT  | UNI  | 0 | 0.893 |
+| 161 | UNI  | DOT  | 0 | 0.893 |
+| 116 | LTC  | XLM  | 0 | 0.871 |
+| 177 | XLM  | LTC  | 0 | 0.871 |
+| 157 | UNI  | ADA  | 0 | 0.867 |
+| 24  | ADA  | UNI  | 0 | 0.867 |
+| 7   | AAVE | LTC  | 0 | 0.866 |
+| 104 | LTC  | AAVE | 0 | 0.866 |
+| 168 | UNI  | XLM  | 0 | 0.862 |
+| 181 | XLM  | UNI  | 0 | 0.862 |
+
+</details>
+
+**Observations**:
+- **AAVE–UNI** and **UNI–AAVE** appear at the top with correlation ~0.928.  
+- **FTM–AVAX** also has a strong correlation of ~0.921.  
+- All these correlations are measured at **lag=0**, meaning both series move together simultaneously without a consistent time lead/lag.  
+- This high correlation might indicate these pairs exhibit very similar market behavior in minute-level data, with minimal potential for lead–lag arbitrage but potential for **pairs-trading** if the ratio is stable.
+
 
 [INFO] Highest correlation pair: AAVE vs. UNI => Corr=0.928 @ lag=0
 
@@ -360,12 +372,9 @@ This helps ensure large data sets are handled properly and that we can see any p
 ---
 
 ### Figure: Ensemble vs. Buy & Hold
-<details>
-<summary>Show Image</summary>
 
 ![Image: Ensemble Equity Curve vs. Buy-and-Hold](assets/ensemble_vs_buyhold.png)
 
-</details>
 
 **Analysis:**  
 - Both lines grew significantly, e.g. +600% or more.  
