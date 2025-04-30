@@ -114,7 +114,7 @@ CREATE TABLE [dbo].[fact_crypto_minute](
 	[volatility_5] [decimal](28, 15) NULL,
 	[volatility_10] [decimal](28, 15) NULL,
 	[volatility_20] [decimal](28, 15) NULL,
-	[symbol] [varchar](10) NOT NULL,
+	[symbol] [varchar](5) NOT NULL,
  CONSTRAINT [PK_fact_crypto_minute] PRIMARY KEY CLUSTERED 
 (
 	[symbol] ASC,
@@ -131,11 +131,11 @@ CREATE TABLE [dbo].[intraday_data](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[timestamp] [datetime] NOT NULL,
 	[symbol] [varchar](5) NOT NULL,
-	[open_price] [float] NULL,
-	[high_price] [float] NULL,
-	[low_price] [float] NULL,
-	[close_price] [float] NULL,
-	[volume] [float] NULL,
+	[open_price] [decimal](18, 8) NULL,
+	[high_price] [decimal](18, 8) NULL,
+	[low_price] [decimal](18, 8) NULL,
+	[close_price] [decimal](18, 8) NULL,
+	[volume] [decimal](18,2) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
