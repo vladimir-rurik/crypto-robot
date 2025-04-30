@@ -104,7 +104,7 @@ CREATE TABLE [dbo].[fact_crypto_minute](
 	[volume] [decimal](28, 8) NULL,
 	[returns] [decimal](19, 15) NULL,
 	[log_returns] [decimal](19, 15) NULL,
-	[rsi] [decimal](6, 2) NULL,
+	[rsi] [decimal](8, 2) NULL,
 	[macd] [decimal](10, 6) NULL,
 	[macd_signal] [decimal](10, 6) NULL,
 	[macd_diff] [decimal](10, 6) NULL,
