@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>CryptoReport_DS</DataSourceReference>
+      <CommandText>SELECT
+    symbol,
+    CAST(timestamp AS date) AS trade_date,
+    AVG(close_price)        AS avg_close,
+    SUM(volume)             AS total_volume
+FROM dbo.fact_crypto_minute
+WHERE timestamp &gt;= DATEADD(day, -7, GETUTCDATE()) 
+GROUP BY symbol, CAST(timestamp AS date)
+ORDER BY trade_date, symbol;
+</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="symbol">
+        <DataField>symbol</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="trade_date">
+        <DataField>trade_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="avg_close">
+        <DataField>avg_close</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="total_volume">
+        <DataField>total_volume</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>
