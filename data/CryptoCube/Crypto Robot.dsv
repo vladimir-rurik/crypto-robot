@@ -1,0 +1,216 @@
+﻿<DataSourceView xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="86aa88bc-8496-4a4a-9ca1-5d80960b6f04" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Crypto Robot</ID>
+  <Name>Crypto Robot</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+      <Value>_ALL_TABLES_</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:NameMatchingCriteria</Name>
+      <Value>1</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+      <Value></Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:Layouts</Name>
+      <Value>
+        <Layouts xmlns="">
+          <Diagram>
+            <Name>_ALL_TABLES_</Name>
+            <DiagramLayout>
+              <dds>
+                <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="6" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-18231" scrolltop="-5743" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="39952" y="26247" backcolor="2039583" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+                  <font>
+                    <ddsxmlobjectstreamwrapper binary="01ba0000900144420100065461686f6d61" />
+                  </font>
+                  <mouseicon>
+                    <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+                  </mouseicon>
+                </diagram>
+                <layoutmanager>
+                  <ddsxmlobj />
+                </layoutmanager>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="fact_crypto_minute" left="-33" top="9231" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3000" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000b80b000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_fact_crypto_minute" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Symbol" left="20" top="5455" logicalid="2" controlid="2" masterid="0" hint1="0" hint2="0" width="3000" height="1455" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000b80b0000af050000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dim_Symbol" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Date" left="6211" top="10213" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="3000" height="1455" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000b80b0000af050000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dim_Date" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="21" top="6411" logicalid="4" controlid="4" masterid="0" hint1="0" hint2="0" width="799" height="3120" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="16448250" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[fact_crypto_minute-Symbol]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="2" destid="1" sourceattachpoint="1" destattachpoint="0" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="420" y="6910" />
+                    <point x="420" y="8070" />
+                    <point x="367" y="8070" />
+                    <point x="367" y="9231" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="2667" top="9991" logicalid="5" controlid="5" masterid="0" hint1="0" hint2="0" width="3844" height="940" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="16448250" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[fact_crypto_minute-Date]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="3" destid="1" sourceattachpoint="10" destattachpoint="15" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="6211" y="10390" />
+                    <point x="4589" y="10390" />
+                    <point x="4589" y="10631" />
+                    <point x="2967" y="10631" />
+                  </connector>
+                </ddscontrol>
+              </dds>
+</DiagramLayout>
+            <ShowRelationshipNames>False</ShowRelationshipNames>
+            <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
+            <DiagramViewPortLeft>-18231</DiagramViewPortLeft>
+            <DiagramViewPortTop>-5743</DiagramViewPortTop>
+            <DiagramBoundingLeft>0</DiagramBoundingLeft>
+            <DiagramBoundingTop>0</DiagramBoundingTop>
+            <DiagramZoom>100</DiagramZoom>
+          </Diagram>
+        </Layouts>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <DataSourceID>Crypto Robot</DataSourceID>
+  <Schema>
+    <xs:schema id="Crypto_x0020_Robot" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+      <xs:element name="Crypto_x0020_Robot" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:design-time-name="d82aa10a-b028-4cf6-b2b0-614f92ed6cc1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="dbo_fact_crypto_minute" msprop:design-time-name="a85e440f-d8c6-4526-a4f1-05b55b917a24" msprop:FriendlyName="fact_crypto_minute" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:DbTableName="fact_crypto_minute">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="timestamp" msprop:FriendlyName="timestamp" msprop:DbColumnName="timestamp" msprop:design-time-name="bccee7b0-fbfe-4921-9cc0-644de2d6da22" type="xs:dateTime" />
+                  <xs:element name="open_price" msprop:FriendlyName="open_price" msprop:DbColumnName="open_price" msprop:design-time-name="c33901a3-c0c1-4120-8f54-c374bda8c460" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="high_price" msprop:FriendlyName="high_price" msprop:DbColumnName="high_price" msprop:design-time-name="4f8eb4f0-e5c1-4179-8fdc-c8686c9a623c" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="low_price" msprop:FriendlyName="low_price" msprop:DbColumnName="low_price" msprop:design-time-name="b2b8eb5d-e75a-48ae-a341-3c140d2b33e4" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="close_price" msprop:FriendlyName="close_price" msprop:DbColumnName="close_price" msprop:design-time-name="50aedc88-26f8-4003-a13e-3989a241ef72" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="volume" msprop:FriendlyName="volume" msprop:DbColumnName="volume" msprop:design-time-name="b1d0526f-543d-4b56-8c87-fbc29c19c385" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="returns" msprop:FriendlyName="returns" msprop:DbColumnName="returns" msprop:design-time-name="c5683522-3e90-4028-91df-b6c2c15951ea" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="log_returns" msprop:FriendlyName="log_returns" msprop:DbColumnName="log_returns" msprop:design-time-name="e8583580-6748-4ae7-b434-bf91997ce6fb" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="rsi" msprop:FriendlyName="rsi" msprop:DbColumnName="rsi" msprop:design-time-name="d5415c8b-49ca-4f75-8548-f16852446ac9" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="macd" msprop:FriendlyName="macd" msprop:DbColumnName="macd" msprop:design-time-name="56c06013-0944-4355-9365-192bfdc15bf4" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="macd_signal" msprop:FriendlyName="macd_signal" msprop:DbColumnName="macd_signal" msprop:design-time-name="970085de-5969-4bf7-896d-207aeefdf888" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="macd_diff" msprop:FriendlyName="macd_diff" msprop:DbColumnName="macd_diff" msprop:design-time-name="2e22746c-a467-414b-a6e0-e87e4d2dd824" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="bb_high" msprop:FriendlyName="bb_high" msprop:DbColumnName="bb_high" msprop:design-time-name="173226fc-be07-4a70-be93-80f14ac3156c" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="bb_low" msprop:FriendlyName="bb_low" msprop:DbColumnName="bb_low" msprop:design-time-name="da31c5d6-ed49-4c1e-a66f-c71dbcb8962c" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="bb_width" msprop:FriendlyName="bb_width" msprop:DbColumnName="bb_width" msprop:design-time-name="f4210365-7f38-4e71-a47f-c5e0f0b2db3e" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="volatility_5" msprop:FriendlyName="volatility_5" msprop:DbColumnName="volatility_5" msprop:design-time-name="add9a9ed-2185-40b8-a947-c5d70b976959" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="volatility_10" msprop:FriendlyName="volatility_10" msprop:DbColumnName="volatility_10" msprop:design-time-name="8914763f-2c23-47fa-9a23-9d7e5b3041e0" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="volatility_20" msprop:FriendlyName="volatility_20" msprop:DbColumnName="volatility_20" msprop:design-time-name="0466828c-1abd-46ed-835d-3edbe361a850" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="symbol" msprop:FriendlyName="symbol" msprop:DbColumnName="symbol" msprop:design-time-name="0e67bbd2-c7ab-4af1-b5c5-004a0eaefbe4">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="5" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="FactDateKey" msdata:ReadOnly="true" msprop:Description="" msprop:design-time-name="7a0be815-8c41-41c7-8176-97ebee087002" msprop:IsLogical="True" msprop:DbColumnName="FactDateKey" msprop:ComputedColumnExpression="CAST([timestamp] AS date)" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dim_Symbol" msprop:design-time-name="6b4de7ce-39eb-47c7-a141-7a6379d6f851" msprop:FriendlyName="Symbol" msprop:TableType="Table" msprop:DbSchemaName="dim" msprop:DbTableName="Symbol">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="symbol" msprop:FriendlyName="symbol" msprop:DbColumnName="symbol" msprop:design-time-name="beb5ca20-ef10-4a76-ae13-0e06342d94e4">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="5" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dim_Date" msprop:design-time-name="0b4b02ea-1d9d-4d37-8cbb-7825e5edc5c5" msprop:FriendlyName="Date" msprop:TableType="Table" msprop:DbSchemaName="dim" msprop:DbTableName="Date">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="DateKey" msprop:FriendlyName="DateKey" msprop:DbColumnName="DateKey" msprop:design-time-name="f11b24e3-c643-4838-a95a-fe538f803a28" type="xs:dateTime" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_fact_crypto_minute" />
+          <xs:field xpath="timestamp" />
+          <xs:field xpath="symbol" />
+        </xs:unique>
+        <xs:unique name="dim_Symbol_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dim_Symbol" />
+          <xs:field xpath="symbol" />
+        </xs:unique>
+        <xs:unique name="dim_Date_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dim_Date" />
+          <xs:field xpath="DateKey" />
+        </xs:unique>
+      </xs:element>
+      <xs:annotation>
+        <xs:appinfo>
+          <msdata:Relationship name="fact_crypto_minute-Symbol" msdata:parent="dim_Symbol" msdata:child="dbo_fact_crypto_minute" msdata:parentkey="symbol" msdata:childkey="symbol" />
+          <msdata:Relationship name="fact_crypto_minute-Date" msdata:parent="dim_Date" msdata:child="dbo_fact_crypto_minute" msdata:parentkey="DateKey" msdata:childkey="timestamp" msprop:Description="" msprop:IsLogical="True" />
+        </xs:appinfo>
+      </xs:annotation>
+    </xs:schema>
+    <Crypto_x0020_Robot xmlns="" />
+  </Schema>
+</DataSourceView>

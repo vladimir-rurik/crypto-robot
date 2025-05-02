@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "CryptoCube", "CryptoCube.dwproj", "{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}"
+EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "CryptoReport", "..\CryptoReport\CryptoReport.rptproj", "{2F2B84C0-4871-82EA-CF7B-B86066D260B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Development|Default = Development|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.Debug|Default.ActiveCfg = Development
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.Debug|Default.Build.0 = Development
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.Debug|Default.Deploy.0 = Development
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.DebugLocal|Default.ActiveCfg = Development
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.DebugLocal|Default.Build.0 = Development
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.DebugLocal|Default.Deploy.0 = Development
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.Development|Default.ActiveCfg = Development
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.Development|Default.Build.0 = Development
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.Development|Default.Deploy.0 = Development
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.Release|Default.ActiveCfg = Development
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.Release|Default.Build.0 = Development
+		{B9C77DE7-2A4A-024C-7488-A6E3D1AAF6AA}.Release|Default.Deploy.0 = Development
+		{2F2B84C0-4871-82EA-CF7B-B86066D260B6}.Debug|Default.ActiveCfg = Debug
+		{2F2B84C0-4871-82EA-CF7B-B86066D260B6}.Debug|Default.Build.0 = Debug
+		{2F2B84C0-4871-82EA-CF7B-B86066D260B6}.Debug|Default.Deploy.0 = Debug
+		{2F2B84C0-4871-82EA-CF7B-B86066D260B6}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{2F2B84C0-4871-82EA-CF7B-B86066D260B6}.DebugLocal|Default.Build.0 = DebugLocal
+		{2F2B84C0-4871-82EA-CF7B-B86066D260B6}.Development|Default.ActiveCfg = Release
+		{2F2B84C0-4871-82EA-CF7B-B86066D260B6}.Development|Default.Build.0 = Release
+		{2F2B84C0-4871-82EA-CF7B-B86066D260B6}.Development|Default.Deploy.0 = Release
+		{2F2B84C0-4871-82EA-CF7B-B86066D260B6}.Release|Default.ActiveCfg = Release
+		{2F2B84C0-4871-82EA-CF7B-B86066D260B6}.Release|Default.Build.0 = Release
+		{2F2B84C0-4871-82EA-CF7B-B86066D260B6}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89682751-FC41-4DC4-9B97-55BAB6F88A2C}
+	EndGlobalSection
+EndGlobal
